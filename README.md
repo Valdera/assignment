@@ -8,4 +8,4 @@
 
 ## Database Schema
 
-![Database Schema](db-schema.png)
+![Database Schema](database-schema.png)
