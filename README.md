@@ -6,5 +6,6 @@
 - Flask 2.0.1
 - PostgreSQL 11
 
-## DB
-# assignment
+## Database Schema
+
+![Database Schema](db-schema.png)

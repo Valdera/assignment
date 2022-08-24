@@ -1,0 +1,19 @@
+version: '3.4'
+services:
+  app:
+    container_name: assignment
+    build: .
+    volumes:
+      - './:/usr/src/app'
+    ports:
+      - 5001:5000
+  db:
+    image: postgres:11-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
