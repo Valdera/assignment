@@ -10,7 +10,7 @@ class OrderModel(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"))
 
     customer = db.relationship("CustomerModel", back_populates="orders")
-    book = db.relationship("StoreModel", back_populates="orders")
+    book = db.relationship("BookModel", back_populates="orders")
 
     @classmethod
     def find_by_id(cls, id: int) -> "OrderModel":

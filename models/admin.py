@@ -12,6 +12,7 @@ class AdminModel(db.Model):
     password = db.Column(db.String(50), nullable=False)
     phone_number = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(100), nullable=False)
+    created_at = db.Column(db.DateTime())
 
     @classmethod
     def find_by_id(cls, id: int) -> "AdminModel":
