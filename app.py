@@ -18,6 +18,7 @@ from resources.order import Order
 app = Flask(__name__)
 
 app.config.from_object(config)
+app.config["SQLALCHEMY_DATABASE_URI"] = app.config["SQLALCHEMY_DATABASE_URI"].replace("postgres", "postgresql")
 api = Api(app)
 migrate = Migrate(app, db)
 
