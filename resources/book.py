@@ -1,3 +1,5 @@
+import datetime
+
 from flask_restful import Resource
 from flask import request
 
@@ -15,6 +17,8 @@ class BookAdmin(Resource):
     @login_required("admin")
     def post(cls):
         book = book_schema.load(request.get_json())
+        book.created_at = datetime.datetime.now()
+
         book.save_to_db()
         return {"data": book_schema.dump(book)}, 201
 

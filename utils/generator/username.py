@@ -14,4 +14,4 @@ def generate_username(name: str, str_len: int = 5, total_len: int = 10):
     range_end = (10**n)-1
 
     # Concatenate sliced name and generated random number
-    return first + str(randint(range_start, range_end))
+    return first.lower() + str(randint(range_start, range_end))

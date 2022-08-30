@@ -1,3 +1,3 @@
 run-test:	
 	rm data.db || true
-	python app.py
+	python3 app.py

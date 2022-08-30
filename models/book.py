@@ -10,8 +10,9 @@ class BookModel(db.Model):
     author = db.Column(db.String(50), nullable=False)
     synopsis = db.Column(db.Text(), nullable=False)
     price = db.Column(db.Float(precision=2), nullable=False)
-    image_url = db.Column(db.String(150), nullable=False)
-    content_url = db.Column(db.String(150), nullable=False)
+    image_url = db.Column(db.Text(), nullable=False)
+    content_url = db.Column(db.Text(), nullable=False)
+    created_at = db.Column(db.DateTime())
 
     orders = db.relationship(
         "OrderModel", back_populates="book", lazy="dynamic")

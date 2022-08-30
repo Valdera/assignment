@@ -1,4 +1,5 @@
 import hmac
+import datetime
 
 from flask_login import login_user
 from flask_restful import Resource
@@ -21,13 +22,14 @@ class AdminRegister(Resource):
         admin = user_schema.load(request.get_json())
         admin.username = generate_username(admin.name)
         admin.role = role_enum["admin"]
+        admin.created_at = datetime.datetime.now()
 
         if UserModel.find_by_email(admin.email):
             return {"message": EMAIL_ALREADY_EXISTS}, 400
 
         admin.save_to_db()
 
-        return {"message": f"Hi {admin.name}, welcome to the application!!", "data": user_schema.dump(customer)}, 201
+        return {"message": f"Hi {admin.name}, welcome to the application!!", "data": user_schema.dump(admin)}, 201
 
 
 class AdminLogin(Resource):

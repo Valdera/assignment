@@ -8,6 +8,7 @@ class OrderModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, db.ForeignKey("books.id"))
     customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"))
+    created_at = db.Column(db.DateTime())
 
     customer = db.relationship("UserModel", back_populates="orders")
     book = db.relationship("BookModel", back_populates="orders")

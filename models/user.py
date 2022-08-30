@@ -1,7 +1,6 @@
 from typing import List
 from db.conn import db
 from flask_login import UserMixin
-from models.role import RoleEnum
 
 
 class UserModel(db.Model, UserMixin):
@@ -12,9 +11,10 @@ class UserModel(db.Model, UserMixin):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False)
-    phone_number = db.Column(db.String(50))
-    address = db.Column(db.String(100))
+    phone_number = db.Column(db.Text)
+    address = db.Column(db.Text)
     role = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime())
 
     orders = db.relationship(
         "OrderModel", back_populates="customer", lazy="dynamic")

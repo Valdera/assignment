@@ -8,10 +8,10 @@ WORKDIR /usr/src/app
 COPY ./requirements.txt /usr/src/app/requirements.txt
 
 # install requirements
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 # add app
 COPY . /usr/src/app
 
 # run server
-CMD python app.py
+CMD python3 app.py
