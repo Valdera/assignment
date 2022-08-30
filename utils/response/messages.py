@@ -1,0 +1,6 @@
+EMAIL_ALREADY_EXISTS = "A user with same email already exists."
+USERNAME_ALREADY_EXISTS = "A user with same username already exists."
+INVALID_CREDENTIALS_USERNAME = "username doesn't exists"
+INVALID_CREDENTIALS_PASSWORD = "password is incorrect"
+ITEM_NOT_FOUND = "An item with this id doesn't exists"
+ITEM_DELETED = "Item has been deleted"

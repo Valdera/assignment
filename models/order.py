@@ -9,7 +9,7 @@ class OrderModel(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey("books.id"))
     customer_id = db.Column(db.Integer, db.ForeignKey("customers.id"))
 
-    customer = db.relationship("CustomerModel", back_populates="orders")
+    customer = db.relationship("UserModel", back_populates="orders")
     book = db.relationship("BookModel", back_populates="orders")
 
     @classmethod

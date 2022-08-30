@@ -1,19 +1,18 @@
 
 from utils.serializer.ma import ma
 
-from marshmallow_sqlalchemy import auto_field
 from marshmallow import fields
 
-from models.user import CustomerModel
-from models.order import OrderModel
+from models.user import UserModel
 
 
-class CustomerSchema(ma.SQLAlchemyAutoSchema):
+class UserSchema(ma.SQLAlchemyAutoSchema):
     email = fields.Email()
     username = fields.String()
+    role = fields.Integer()
 
     class Meta:
-        model = CustomerModel
+        model = UserModel
         load_instance = True
         load_only = ("password",)
         dump_only = ("id",)

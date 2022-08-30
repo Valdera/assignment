@@ -1,16 +1,18 @@
 from utils.serializer.ma import ma
 
 from schemas.book import BookSchema
-from schemas.customer import CustomerSchema
+from schemas.user import UserSchema
 
 from models.order import OrderModel
 
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from marshmallow import fields
 
 
 class OrderSchema(ma.SQLAlchemyAutoSchema):
-    customer = ma.Nested(CustomerSchema, many=True)
-    book = ma.Nested(BookSchema, many=True)
+    customer_id = fields.Integer()
+
+    customer = ma.Nested(UserSchema)
+    book = ma.Nested(BookSchema)
 
     class Meta:
         model = OrderModel

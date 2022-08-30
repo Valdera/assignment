@@ -1,7 +1,5 @@
 from utils.serializer.ma import ma
 from models.book import BookModel
-from models.order import OrderModel
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
 class BookSchema(ma.SQLAlchemyAutoSchema):

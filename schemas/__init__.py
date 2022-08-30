@@ -1,4 +1,3 @@
-from models.user import CustomerModel
+from models.user import UserModel
 from models.book import BookModel
 from models.order import OrderModel
-from models.admin import AdminModel

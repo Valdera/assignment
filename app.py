@@ -1,20 +1,18 @@
 from flask import Flask, jsonify
-from flask_login_multi.login_manager import LoginManager
 from flask_restful import Api
-from flask_jwt_extended import JWTManager
 from marshmallow import ValidationError
 
 from config import config
 from db.conn import db
+from resources.book import BookAdmin, BookItemAdmin
+from utils.auth.manager import login_manager
 from utils.serializer.ma import ma
 
-from models.admin import AdminModel
-from models.user import CustomerModel
+from models.user import UserModel
 
-from resources.user import CustomerLogin, CustomerRegister
+from resources.customer import Customer, CustomerLogin, CustomerRegister
 
 app = Flask(__name__)
-login_manager = LoginManager()
 
 app.config.from_object(config)
 api = Api(app)
@@ -31,19 +29,17 @@ def handle_marshmallow_validation(err):
 
 
 @login_manager.user_loader
-def load_user(id: str, endpoint: str):
-    print(endpoint)
-    if endpoint == 'admin':
-        return AdminModel.query.get(int(id))
-    else:
-        return CustomerModel.query.get(int(id))
+def load_user(id: str):
+    return UserModel.query.get(int(id))
 
-
-# jwt = JWTManager(app)
 
 api.add_resource(CustomerRegister, "/customer/register")
 api.add_resource(CustomerLogin, "/customer/login")
-
+api.add_resource(AdminRegister)
+api.add_resource(Customer, "/customer")
+api.add_resource(BookAdmin, "/admin/ebook")
+api.add_resource(BookItemAdmin, "/admin/ebook/<int:id>")
+api.add_resource()
 
 if __name__ == "__main__":
     db.init_app(app)

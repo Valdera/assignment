@@ -1,10 +1,10 @@
 from typing import List
 from db.conn import db
 from flask_login import UserMixin
-import hmac
+from models.role import RoleEnum
 
 
-class CustomerModel(db.Model, UserMixin):
+class UserModel(db.Model, UserMixin):
     __tablename__ = "customers"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -14,31 +14,25 @@ class CustomerModel(db.Model, UserMixin):
     password = db.Column(db.String(50), nullable=False)
     phone_number = db.Column(db.String(50))
     address = db.Column(db.String(100))
+    role = db.Column(db.Integer, nullable=False)
 
     orders = db.relationship(
         "OrderModel", back_populates="customer", lazy="dynamic")
 
     @classmethod
-    def find_by_id(cls, id: int) -> "CustomerModel":
+    def find_by_id(cls, id: int) -> "UserModel":
         return cls.query.filter_by(id=id).first()
 
     @classmethod
-    def find_by_email(cls, email: str) -> "CustomerModel":
+    def find_by_email(cls, email: str) -> "UserModel":
         return cls.query.filter_by(email=email).first()
 
     @classmethod
-    def find_by_username(cls, username: str) -> "CustomerModel":
+    def find_by_username(cls, username: str) -> "UserModel":
         return cls.query.filter_by(username=username).first()
 
     @classmethod
-    def authenticate(cls, username: str, password: str) -> "CustomerModel":
-        customer = cls.query.filter_by(username=username).first()
-
-        if customer and hmac.compare_digest(customer.password, password):
-            return customer
-
-    @classmethod
-    def find_all(cls) -> List["CustomerModel"]:
+    def find_all(cls) -> List["UserModel"]:
         return cls.query.all()
 
     def save_to_db(self) -> None:
