@@ -21,6 +21,7 @@ app.config.from_object(config)
 api = Api(app)
 migrate = Migrate(app, db)
 
+print(app.config)
 
 @app.errorhandler(ValidationError)
 def handle_marshmallow_validation(err):
